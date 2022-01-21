@@ -8,6 +8,7 @@ exports.up = async function (knex) {
       table.increments("step_id");
       table.integer("step_number", 128);
       table.string("instructions");
+      table.integer("recipe_id");
     })
     .createTable("ingridients", (table) => {
       table.increments("ingridients_id");
@@ -28,9 +29,8 @@ exports.up = async function (knex) {
         .unsigned()
         .notNullable()
         .references("ingridients_id")
-        .inTable("ingridients")
-        .onDelete("RESTRICT")
-        .onUpdate("RESTRICT");
+        .inTable("ingridients");
+      table.string("ingridient_amount");
     });
 };
 
